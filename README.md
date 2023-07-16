@@ -35,7 +35,7 @@ After a successful compilation, the directory will contain the compiled module F
 Any invocation of Fourthorder_vasp.py requires a POSCAR file with a description of the unit cell to be present in the current directory. The script uses no other configuration files, and takes exactly five mandatory command-line arguments:
 
 ```bash
-Fourthorder_vasp.py sow|reap na nb nc cutoff[nm/-integer]
+Fourthorder_mtp.py sow|reap na nb nc cutoff[nm/-integer]
 ```
 
 The first argument must be either "sow" or "reap", and chooses the operation to be performed (displacement generation or IFC matrix reconstruction). The next three must be positive integers, and specify the dimensions of the supercell to be created. Finally, the "cutoff" parameter decides on a force cutoff distance. Interactions between atoms spaced further than this parameter are neglected. If cutoff is a positive real number, it is interpreted as a distance in nm; on the other hand, if it is a negative integer -n, the maximum distance among n-th neighbors in the supercell is automatically determined and the cutoff distance is set accordingly.
@@ -58,7 +58,7 @@ Direct
 Let us assume that such POSCAR is in the current directory and that Fourthorder_vasp.py is in our PATH. To generate an irreducible set of displacements for a 4x4x4 supercell and up-to-second-neighbor interactions, we run
 
 ```bash
-Fourthorder_vasp.py sow 4 4 4 -2
+Fourthorder_mtp.py sow 4 4 4 -2
 ```
 
 This creates a file called 4TH.SPOSCAR with the undisplaced supercell coordinates and 744 files with names following the pattern 4TH.POSCAR.*. It is the latter that need to be input to VASP. This step is completely system-dependent, but suppose that in ~/vaspinputs we have the required INCAR, POTCAR and KPOINTS files as well as a runvasp.sh script that can be passed to qsub. We can run a command sequence like:
